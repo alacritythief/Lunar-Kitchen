@@ -5,9 +5,20 @@ class Recipe
   def initialize(id, name, description, ingredients, instructions)
     @id = id
     @name = name
-    @description = description
+
+    if description == nil
+      @description = "This recipe doesn't have a description."
+    else
+      @description = description
+    end
+
     @ingredients = []
-    @instructions = instructions
+
+    if instructions == nil
+      @instructions = "This recipe doesn't have any instructions."
+    else
+      @instructions = instructions
+    end
   end
 
   def self.all
@@ -22,7 +33,6 @@ class Recipe
   end
 
   def self.find(id)
-  #finds recipe with ID and collects data to ingredients thing
 
     ingredients_query = "
     SELECT ingredients.name FROM ingredients
@@ -48,7 +58,6 @@ class Recipe
 
     recipe.ingredients = ingredients
     return recipe
-
   end
 end
 
@@ -68,18 +77,3 @@ class Import
     end
   end
 end
-
-
-
-  # id = params[:id]
-
-  # ingredients = "
-  # SELECT ingredients.name FROM ingredients
-  # WHERE ingredients.recipe_id = #{id}"
-
-  # recipe = "
-  # SELECT name, instructions, description FROM recipes
-  # WHERE id = #{id}"
-
-  # @recipe = sql(recipe)
-  # @ingredients = sql(ingredients)
